@@ -1,0 +1,28 @@
+[
+  {
+    "nome": "Layane",
+    "email": "lay@gmail.com",
+    "telefone": "14998810422",
+    "cpf": "43670980873",
+    "cep": "17526100",
+    "logradouro": "Herminio Cavallari",
+    "numero": "701",
+    "complemento": "Bloco 9 Apto 933",
+    "bairro": "Cavallari",
+    "cidade": "Marília",
+    "uf": "SP"
+  },
+  {
+    "nome": "Lucineia",
+    "email": "neia@gmail.com",
+    "telefone": "14998417486",
+    "cpf": "28252885861",
+    "cep": "17512155",
+    "logradouro": "Cacilda Munhoz",
+    "numero": "657",
+    "complemento": "Casa",
+    "bairro": "Santa Antonieta",
+    "cidade": "Marilia",
+    "uf": "SP"
+  }
+]
