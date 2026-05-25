@@ -1,0 +1,160 @@
+.agendamento-wrapper {
+  min-height: 100vh;
+  padding: 3rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Mantendo o gradiente de cores do salão */
+  background: linear-gradient(135deg, #f9f1f2 0%, #fcf9f9 50%, #f7ebeb 100%);
+}
+
+/* Cabeçalho */
+.main-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  width: 100%;
+  max-width: 500px;
+  position: relative;
+}
+
+.back-link {
+  display: inline-block;
+  color: #777777;
+  text-decoration: none;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+  transition: color 0.3s ease;
+}
+
+.back-link:hover {
+  color: #d8a4a5;
+}
+
+.main-header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  font-weight: 600;
+  color: #2c2c2c;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.5rem;
+}
+
+.main-header .subtitle {
+  font-family: 'Montserrat', sans-serif;
+  color: #777777;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.header-divider {
+  width: 50px;
+  height: 2px;
+  background-color: #d8a4a5;
+  margin: 1.2rem auto 0;
+  border-radius: 2px;
+}
+
+/* Estrutura do Card - Centralização Perfeita */
+.content-container {
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  justify-content: center;
+}
+
+.booking-card {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(216, 164, 165, 0.25);
+  border-radius: 24px;
+  padding: 3rem 2.5rem;
+  box-shadow: 0 20px 40px -15px rgba(216, 164, 165, 0.1);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.5rem;
+}
+
+/* Labels e Inputs */
+label {
+  display: block;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #555555;
+  margin-bottom: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+input {
+  width: 100%;
+  padding: 0.9rem 1.2rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.95rem;
+  color: #2c2c2c;
+  background-color: #ffffff;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  outline: none;
+}
+
+/* Estilização sutil para o seletor de data e hora nativo */
+input[type="datetime-local"] {
+  color: #2c2c2c;
+  font-family: 'Montserrat', sans-serif;
+}
+
+input::placeholder {
+  color: #a1a1aa;
+}
+
+input:focus {
+  border-color: #d8a4a5;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 4px rgba(216, 164, 165, 0.15);
+}
+
+/* Botão de Confirmação */
+.btn-submit {
+  width: 100%;
+  background-color: #d8a4a5;
+  color: #ffffff;
+  padding: 1.1rem;
+  border: none;
+  border-radius: 12px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+  box-shadow: 0 4px 12px rgba(216, 164, 165, 0.2);
+}
+
+.btn-submit:hover {
+  background-color: #c48b8c;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(216, 164, 165, 0.3);
+}
+
+.btn-submit:active {
+  transform: translateY(0);
+}
+
+/* Ajustes Mobile */
+@media (max-width: 640px) {
+  .booking-card {
+    padding: 2.5rem 1.5rem;
+  }
+
+  .main-header h1 {
+    font-size: 2.4rem;
+  }
+}

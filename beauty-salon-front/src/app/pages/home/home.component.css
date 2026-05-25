@@ -1,0 +1,258 @@
+/* --- ESTADO GERAL DA HOME --- */
+.home-wrapper {
+  min-height: 100vh;
+  padding: 3rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Gradiente premium integrado com o fundo rosa sutil */
+  background: linear-gradient(135deg, #f9f1f2 0%, #fcf9f9 50%, #f7ebeb 100%);
+}
+
+/* --- CABEÇALHO --- */
+.main-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.main-header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 4.5rem; /* Aumentado de 4.0rem para 4.5rem */
+  font-weight: 600;
+  color: #2c2c2c;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.75rem;
+}
+
+.main-header .subtitle {
+  font-family: 'Montserrat', sans-serif;
+  color: #555555; /* Escurecido levemente para dar mais contraste ao aumentar */
+  font-size: 1.25rem; /* Aumentado de 1.1rem para 1.25rem */
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-weight: 500; /* Ajustado o peso para melhor leitura */
+}
+
+.header-divider {
+  width: 60px; /* Aumentado de 50px para 60px para acompanhar a fonte */
+  height: 2px;
+  background-color: #d8a4a5;
+  margin: 1.5rem auto 0;
+  border-radius: 2px;
+}
+
+/* --- CONTAINERS E SEÇÕES --- */
+.content-container {
+  width: 100%;
+  max-width: 1200px; /* Alargado um pouquinho mais para acomodar fontes maiores */
+}
+
+.menu-section {
+  margin-bottom: 3.5rem;
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem; /* Aumentado de 1.6rem para 2.0rem */
+  color: #2c2c2c;
+  text-align: center;
+  margin-bottom: 2rem;
+  font-weight: 600;
+}
+
+.section-title.restricted {
+  font-size: 1.6rem; /* Aumentado de 1.3rem para 1.6rem */
+  color: #555555;
+}
+
+/* --- GRID PRINCIPAL --- */
+.nav-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.75rem; /* Aumentado o vão para equilibrar o tamanho dos textos */
+  width: 100%;
+}
+
+/* Mantém o comportamento centralizado na seção restrita */
+.nav-grid.single-item {
+  display: flex;
+  justify-content: center;
+}
+
+/* --- CARDS DE SERVIÇOS --- */
+.service-card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(216, 164, 165, 0.25);
+  border-radius: 20px;
+  padding: 2.5rem 1.75rem; /* Padding horizontal ligeiramente maior */
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(216, 164, 165, 0.06);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+}
+
+.service-card:hover {
+  transform: translateY(-8px);
+  border-color: #d8a4a5;
+  box-shadow: 0 20px 40px -15px rgba(216, 164, 165, 0.18);
+}
+
+/* Elementos Internos do Card */
+.card-icon-wrapper {
+  width: 75px; /* Aumentado de 70px para 75px */
+  height: 75px;
+  background-color: #fcf9f9;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.service-card:hover .card-icon-wrapper {
+  background-color: #fcf1f1;
+  transform: scale(1.05);
+}
+
+.card-icon {
+  font-size: 2rem; /* Aumentado de 1.8rem para 2.0rem */
+}
+
+.service-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.75rem; /* Aumentado de 1.5rem para 1.75rem */
+  color: #2c2c2c;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.service-card p {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.05rem;
+  color: #555555;
+  line-height: 1.6;
+  margin-bottom: 2.2rem;
+  flex-grow: 1;
+}
+
+/* --- BOTÕES CUSTOMIZADOS (Equilibrado para o texto maior caber) --- */
+.action-btn {
+  width: 100%;
+  background-color: #d8a4a5;
+  color: #ffffff;
+  padding: 0.85rem 0.6rem; /* Calibrado os paddings */
+  border-radius: 12px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem; /* Subiu com segurança de 0.85rem para 0.95rem */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  transition: all 0.3s ease;
+  margin-top: auto;
+  box-sizing: border-box;
+}
+
+.action-btn .arrow {
+  font-size: 1.1rem; /* Aumentou a setinha junto com o texto */
+  transition: transform 0.3s ease;
+}
+
+.service-card:hover .action-btn {
+  background-color: #c48b8c;
+}
+
+.service-card:hover .action-btn .arrow {
+  transform: translateX(4px);
+}
+
+/* --- CARD DA GESTÃO ADMINISTRATIVA --- */
+.management-card {
+  width: 100%;
+  max-width: 600px; /* Aumentado de 550px para 600px para acomodar fontes maiores */
+  padding: 2rem;
+  flex-direction: row;
+  text-align: left;
+  align-items: center;
+  gap: 1.75rem;
+  height: auto;
+}
+
+.management-card .card-icon-wrapper.mini {
+  width: 55px; /* Ajustado de 50px para 55px */
+  height: 55px;
+  margin-bottom: 0;
+  flex-shrink: 0;
+}
+
+.management-card .card-icon {
+  font-size: 1.5rem; /* Ajustado de 1.3rem para 1.5rem */
+}
+
+.management-info {
+  flex-grow: 1;
+}
+
+.management-card h3 {
+  font-size: 1.4rem; /* Aumentado de 1.2rem para 1.4rem */
+  margin-bottom: 0.35rem;
+}
+
+.management-card p {
+  margin-bottom: 0;
+  font-size: 1rem; /* Aumentado de 0.85rem para 1.0rem */
+  color: #555555;
+}
+
+.management-card .action-btn.outline {
+  width: auto;
+  background-color: transparent;
+  border: 1px solid #c8c8c8;
+  color: #555555;
+  padding: 0.7rem 1.4rem;
+  font-size: 0.95rem; /* Ajustado para equiparar ao botão principal */
+}
+
+.management-card:hover .action-btn.outline {
+  background-color: #fcf9f9;
+  border-color: #777777;
+  color: #2c2c2c;
+}
+
+.section-divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(216, 164, 165, 0.3), transparent);
+  margin-bottom: 2.5rem;
+}
+
+/* --- CORREÇÃO DO RESPONSIVO --- */
+@media (max-width: 950px) { /* Ajustado de 900px para 950px pela nova largura dos textos */
+  .nav-grid {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
+
+  .main-header h1 {
+    font-size: 3.2rem;
+  }
+
+  .management-card {
+    flex-direction: column;
+    text-align: center;
+    gap: 1.2rem;
+  }
+
+  .management-card .action-btn.outline {
+    width: 100%;
+  }
+}

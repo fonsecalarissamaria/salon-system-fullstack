@@ -1,0 +1,27 @@
+<div class="login-wrapper">
+  <div class="login-card">
+    <h1>Área da Gestão</h1>
+    <p class="subtitle">Acesso exclusivo para administradores.</p>
+
+    <div class="form-group">
+      <label for="senhaAdmin">Senha de Acesso</label>
+      <!-- Vinculamos o input à variável 'senhaAdmin' e escutamos a tecla Enter -->
+      <input
+        type="password"
+        id="senhaAdmin"
+        [(ngModel)]="senhaAdmin"
+        placeholder="••••••••"
+        (keydown.enter)="validarSenha()"
+      >
+    </div>
+
+    <button class="btn-login" (click)="validarSenha()">Entrar</button>
+
+    <!-- Mensagem de erro condicional do Angular -->
+    @if (exibirErro) {
+      <p id="mensagemErro">Senha incorreta. Tente novamente.</p>
+    }
+
+    <a routerLink="/" class="back-link">← Voltar ao Portal</a>
+  </div>
+</div>

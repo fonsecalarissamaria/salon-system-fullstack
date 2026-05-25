@@ -1,0 +1,230 @@
+<div class="gestao-wrapper">
+  <header class="main-header">
+    <div class="header-side-space"></div>
+    <h1>Painel de Controle</h1>
+    <button class="logout-btn" (click)="sairDaGestao()">Sair</button>
+  </header>
+
+  <main class="content-container">
+    <!-- NAVEGAÇÃO ENTRE ABAS -->
+    <div class="tabs-navigation">
+      <button class="tab-nav-btn" [class.active]="aba === 'desempenho'" (click)="mudarAba('desempenho')">
+        📊 Desempenho
+      </button>
+      <button class="tab-nav-btn" [class.active]="aba === 'agenda'" (click)="mudarAba('agenda')">
+        📅 Agenda
+      </button>
+      <button class="tab-nav-btn" [class.active]="aba === 'clientes'" (click)="mudarAba('clientes')">
+        👥 Clientes
+      </button>
+    </div>
+
+    <!-- CONTEÚDO: DESEMPENHO -->
+    @if (aba === 'desempenho') {
+      <div class="tab-fade-in">
+        <section class="dashboard-card">
+          <h2>Resumo da Semana</h2>
+          <p class="period-text">{{ textoPeriodo }}</p>
+
+          <div class="stats-grid">
+            <div class="stat-card total">
+              <div class="stat-number">{{ totalSemana }}</div>
+              <p class="stat-label">Total</p>
+            </div>
+            <div class="stat-card confirmado">
+              <div class="stat-number">{{ totalConfirmados }}</div>
+              <p class="stat-label">Confirmados</p>
+            </div>
+            <div class="stat-card pendente">
+              <div class="stat-number">{{ totalPendentes }}</div>
+              <p class="stat-label">Pendentes</p>
+            </div>
+          </div>
+        </section>
+      </div>
+    }
+
+    <!-- CONTEÚDO: AGENDA -->
+    @if (aba === 'agenda') {
+      <div class="tab-fade-in">
+        <section class="dashboard-card">
+          <h2>Aprovações Pendentes</h2>
+
+          @if (agendamentosPendentes.length === 0) {
+            <p class="empty-message">Nenhum agendamento pendente para aprovação.</p>
+          } @else {
+            <ul class="management-list">
+              @for (a of agendamentosPendentes; track a.id) {
+                <li class="list-item animate-row">
+                  <div class="agenda-time">
+                    {{ formatarDataHora(a.data).data }}<br>{{ formatarDataHora(a.data).hora }}
+                  </div>
+                  <div class="agenda-details">
+                    <span class="client-title">{{ a.cliente?.nome }}</span>
+                    <span class="service-subtitle">Tel: {{ a.cliente?.telefone || 'Sem telefone' }}</span>
+                    <span class="service-subtitle">Serviços: {{ a.servicos }}</span>
+                  </div>
+
+                  <div style="display: flex; gap: 8px;">
+                    <button class="btn-approve" (click)="confirmarAgendamento(a.id)">Confirmar</button>
+                    <button class="logout-btn" style="padding: 0.5rem 1rem;" (click)="cancelarPorAdmin(a.id)">Rejeitar</button>
+                  </div>
+                </li>
+              }
+            </ul>
+            <div class="pagination-controls">
+              <button class="btn-page" (click)="mudarPaginaPendentes('anterior')" [disabled]="paginaPendentes === 0">← Voltar</button>
+              <button class="btn-page" (click)="mudarPaginaPendentes('proxima')" [disabled]="paginaPendentes >= totalPaginasPendentes - 1">Avançar →</button>
+            </div>
+          }
+        </section>
+
+        <!-- SEÇÃO: BUSCAR NO HISTÓRICO -->
+        <section class="dashboard-card">
+          <!-- título atualizado para refletir que a agenda de hoje já carrega por padrão -->
+          <h2>Agenda do Dia & Histórico</h2>
+          <div class="filter-row">
+            <div class="filter-group">
+              <label>Início</label>
+              <input type="datetime-local" [(ngModel)]="filtroInicio">
+            </div>
+            <div class="filter-group">
+              <label>Fim</label>
+              <input type="datetime-local" [(ngModel)]="filtroFim">
+            </div>
+          </div>
+          <button class="btn-primary-action" (click)="filtrarAgendamentos()">Filtrar Agendamentos</button>
+
+          <!-- mensagem padrão caso ela limpe os filtros -->
+          @if (!pesquisaRealizada) {
+            <p class="empty-message" style="text-align: center; color: #777777; font-style: italic; margin-top: 2rem;">
+              Escolha um período válido acima para visualizar a agenda.
+            </p>
+          } @else {
+
+            <div class="historico-resultados-container" style="margin-top: 2.5rem; display: flex; flex-direction: column; gap: 2rem;">
+
+              <!-- CATEGORIA 1: CONFIRMADOS -->
+              <div class="historico-secao">
+                <h3 style="font-family: 'Playfair Display', serif; color: #2e7d32; font-size: 1.3rem; margin-bottom: 1rem; border-bottom: 2px solid #e8f5e9; padding-bottom: 0.3rem;">
+                  🟢 Confirmados ({{ historicoConfirmados.length }})
+                </h3>
+                @if (historicoConfirmados.length === 0) {
+                  <p class="empty-message" style="font-size: 0.9rem; color: #999; font-style: italic; padding-left: 0.5rem;">Nenhum horário confirmado neste período.</p>
+                } @else {
+                  <ul class="management-list">
+                    @for (h of historicoConfirmados; track h.id) {
+                      <li class="list-item">
+                        <div class="agenda-time" style="background-color: #2e7d32;">
+                          {{ formatarDataHora(h.data).data }}<br>{{ formatarDataHora(h.data).hora }}
+                        </div>
+                        <div class="agenda-details">
+                          <span class="client-title">{{ h.cliente?.nome }}</span>
+                          <span class="service-subtitle">Serviços: {{ h.servicos }}</span>
+                        </div>
+
+                        <!-- BOTÕES DE AÇÃO DO CONFIRMADO -->
+                        <div style="display: flex; gap: 12px; align-items: center;">
+                          <!-- Botão de Finalizar Atendimento -->
+                          <button class="btn-approve"
+                                  style="background-color: #1565c0; padding: 0.5rem 1rem; font-size: 0.85rem;"
+                                  (click)="finalizarAgendamento(h.id)">
+                            Concluir Atendimento
+                          </button>
+
+                          <!-- Botão de Cancelar -->
+                          <button class="btn-icon btn-delete" (click)="cancelarPorAdmin(h.id)" title="Cancelar Horário">🗑️</button>
+                        </div>
+                      </li>
+                    }
+                  </ul>
+                }
+              </div>
+
+              <!-- CATEGORIA 2: FINALIZADOS -->
+              <div class="historico-secao">
+                <h3 style="font-family: 'Playfair Display', serif; color: #1565c0; font-size: 1.3rem; margin-bottom: 1rem; border-bottom: 2px solid #e3f2fd; padding-bottom: 0.3rem;">
+                  🔵 Atendimentos Concluídos ({{ historicoFinalizados.length }})
+                </h3>
+                @if (historicoFinalizados.length === 0) {
+                  <p class="empty-message" style="font-size: 0.9rem; color: #999; font-style: italic; padding-left: 0.5rem;">Nenhum atendimento concluído neste período.</p>
+                } @else {
+                  <ul class="management-list">
+                    @for (h of historicoFinalizados; track h.id) {
+                      <li class="list-item" style="opacity: 0.85; background-color: #f8fafc;">
+                        <div class="agenda-time" style="background-color: #1565c0;">
+                          {{ formatarDataHora(h.data).data }}<br>{{ formatarDataHora(h.data).hora }}
+                        </div>
+                        <div class="agenda-details">
+                          <span class="client-title" style="color: #555;">{{ h.cliente?.nome }}</span>
+                          <span class="service-subtitle">Serviços: {{ h.servicos }}</span>
+                        </div>
+                        <span style="font-size: 0.85rem; font-weight: 600; color: #1565c0; text-transform: uppercase; letter-spacing: 1px;">✓ Concluído</span>
+                      </li>
+                    }
+                  </ul>
+                }
+              </div>
+
+              <!-- CATEGORIA 3: CANCELADOS -->
+              <div class="historico-secao">
+                <h3 style="font-family: 'Playfair Display', serif; color: #c62828; font-size: 1.3rem; margin-bottom: 1rem; border-bottom: 2px solid #ffebee; padding-bottom: 0.3rem;">
+                  🔴 Cancelados ou Rejeitados ({{ historicoCancelados.length }})
+                </h3>
+                @if (historicoCancelados.length === 0) {
+                  <p class="empty-message" style="font-size: 0.9rem; color: #999; font-style: italic; padding-left: 0.5rem;">Nenhum agendamento cancelado neste período.</p>
+                } @else {
+                  <ul class="management-list">
+                    @for (h of historicoCancelados; track h.id) {
+                      <li class="list-item" style="opacity: 0.7; background-color: #fff5f5; border-color: #fed7d7;">
+                        <div class="agenda-time" style="background-color: #c62828;">
+                          {{ formatarDataHora(h.data).data }}<br>{{ formatarDataHora(h.data).hora }}
+                        </div>
+                        <div class="agenda-details">
+                          <span class="client-title" style="text-decoration: line-through; color: #777;">{{ h.cliente?.nome }}</span>
+                          <span class="service-subtitle">Serviços: {{ h.servicos }}</span>
+                        </div>
+                        <span style="font-size: 0.85rem; font-weight: 600; color: #c62828; text-transform: uppercase; letter-spacing: 1px;">Cancelado</span>
+                      </li>
+                    }
+                  </ul>
+                }
+              </div>
+
+            </div>
+          }
+        </section>
+      </div>
+    }
+
+    <!-- CONTEÚDO: CLIENTES -->
+    @if (aba === 'clientes') {
+      <div class="tab-fade-in">
+        <section class="dashboard-card">
+          <h2>Base de Clientes</h2>
+
+          @if (clientes.length === 0) {
+            <p class="empty-message">Nenhum cliente cadastrado na base.</p>
+          } @else {
+            <ul class="management-list">
+              @for (c of clientes; track c.id) {
+                <li class="list-item animate-row">
+                  <div class="agenda-details no-margin">
+                    <span class="client-title">{{ c.nome }}</span>
+                    <span class="service-subtitle">{{ c.email }} | CPF: {{ c.cpf }}</span>
+                    <span class="service-subtitle" *ngIf="c.endereco">Cidade: {{ c.endereco.cidade }} - {{ c.endereco.uf }}</span>
+                  </div>
+                  <button class="btn-icon btn-delete" (click)="excluirCliente(c.id)" title="Excluir">🗑️</button>
+                </li>
+              }
+            </ul>
+            <div class="pagination-controls">
+              <button class="btn-page" (click)="mudarPaginaClientes('anterior')" [disabled]="paginaClientes === 0">← Voltar</button>
+              <button class="btn-page" (click)="mudarPaginaClientes('proxima')" [disabled]="paginaClientes >= totalPaginasClientes - 1">Avançar →</button>
+            </div>
+          }
+        </section>
+      </div>
+    }
+  </main>
+</div>

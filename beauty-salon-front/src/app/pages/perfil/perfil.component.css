@@ -1,0 +1,395 @@
+.perfil-wrapper {
+  min-height: 100vh;
+  padding: 3rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(135deg, #f9f1f2 0%, #fcf9f9 50%, #f7ebeb 100%);
+}
+
+/* Cabeçalho */
+.main-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  width: 100%;
+  max-width: 500px;
+  position: relative;
+  transition: max-width 0.4s ease;
+}
+
+.main-header:has(+ main .wide-card) {
+  max-width: 650px; /* Alarga o cabeçalho organicamente se o perfil abrir */
+}
+
+.back-link {
+  display: inline-block;
+  color: #777777;
+  text-decoration: none;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+  transition: color 0.3s ease;
+}
+
+.back-link:hover {
+  color: #d8a4a5;
+}
+
+.main-header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  font-weight: 600;
+  color: #2c2c2c;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.5rem;
+}
+
+.main-header .subtitle {
+  font-family: 'Montserrat', sans-serif;
+  color: #777777;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.header-divider {
+  width: 50px;
+  height: 2px;
+  background-color: #d8a4a5;
+  margin: 1.2rem auto 0;
+  border-radius: 2px;
+}
+
+/* Estrutura do Card Reativo */
+.content-container {
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  justify-content: center;
+  transition: max-width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.content-container:has(.wide-card) {
+  max-width: 650px; /* Abre espaço confortável para a aba de dados */
+}
+
+.perfil-card {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(216, 164, 165, 0.25);
+  border-radius: 24px;
+  padding: 3rem 2.5rem;
+  box-shadow: 0 20px 40px -15px rgba(216, 164, 165, 0.1);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.form-section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin: 1.8rem 0 1.2rem;
+  color: #c48b8c;
+  border-bottom: 1px solid rgba(216, 164, 165, 0.15);
+  padding-bottom: 0.4rem;
+}
+
+.form-group {
+  margin-bottom: 1.2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Sistema de Grids com proteção contra esmagamento */
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.pr-grid-cep {
+  grid-template-columns: 1fr 2fr;
+  gap: 1.5rem;
+}
+
+.pr-grid-uf {
+  grid-template-columns: 2fr 2fr 1fr;
+  gap: 1.5rem;
+}
+
+/* Labels e Inputs unificados */
+label {
+  display: block;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #555555;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+input {
+  width: 100%;
+  padding: 0.9rem 1.2rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.95rem;
+  color: #2c2c2c;
+  background-color: #ffffff;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  outline: none;
+}
+
+input:focus {
+  border-color: #d8a4a5;
+  box-shadow: 0 0 0 4px rgba(216, 164, 165, 0.15);
+}
+
+/* Botões de Ações */
+.btn-submit {
+  width: 100%;
+  background-color: #d8a4a5;
+  color: #ffffff;
+  padding: 1.1rem;
+  border: none;
+  border-radius: 12px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1.5rem;
+  box-shadow: 0 4px 12px rgba(216, 164, 165, 0.2);
+}
+
+.btn-submit:hover {
+  background-color: #c48b8c;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(216, 164, 165, 0.3);
+}
+
+/* --- ESTILIZAÇÃO COMPONENTE DE ABAS (Pill Style) --- */
+.tabs-container {
+  display: flex;
+  background-color: #f1ede8;
+  padding: 0.4rem;
+  border-radius: 14px;
+  gap: 0.2rem;
+  margin-bottom: 2rem;
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 0.8rem 1rem;
+  border: none;
+  background: transparent;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #777777;
+  cursor: pointer;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tab-btn:hover {
+  color: #2c2c2c;
+}
+
+.tab-btn.active {
+  background-color: #ffffff;
+  color: #2c2c2c;
+  font-weight: 600;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+}
+
+.tab-icon {
+  font-size: 1.1rem;
+}
+
+/* Animação suave de entrada ao trocar de aba */
+.tab-content-animate {
+  animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- ESTILO DOS CARDS DE AGENDAMENTOS --- */
+.empty-state {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: #777777;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.95rem;
+}
+
+.appointments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.agendamento-card-item {
+  background: #ffffff;
+  border: 1px solid rgba(216, 164, 165, 0.15);
+  border-radius: 16px;
+  padding: 1.25rem 1.5rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.01);
+}
+
+.appointment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  border-bottom: 1px dashed #f1ede8;
+  padding-bottom: 0.5rem;
+}
+
+.status-tag {
+  background-color: #f1f8f5;
+  color: #2e7d32;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.3rem 0.75rem;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.appointment-date {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #2c2c2c;
+}
+
+.service-label {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #777777;
+  text-transform: uppercase;
+  margin-bottom: 0.2rem;
+}
+
+.service-text {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.95rem;
+  color: #2c2c2c;
+}
+
+/* ==========================================================================
+   CONFIGURAÇÕES GLOBAIS DE STATUS E INPUTS (Funcionam em PC, Tablet e Celular)
+   ========================================================================== */
+
+.status-tag {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: inline-block;
+}
+
+/* Amarelo elegante para os pendentes */
+.status-pendente {
+  background-color: #fff8e1 !important;
+  color: #b78103 !important;
+  border: 1px solid rgba(255, 193, 7, 0.3) !important;
+}
+
+/* Verde clássico para os confirmados */
+.status-confirmado {
+  background-color: #e8f5e9 !important;
+  color: #2e7d32 !important;
+  border: 1px solid rgba(46, 125, 50, 0.2) !important;
+}
+
+/* Azul para os finalizados */
+.status-finalizado {
+  background-color: #e3f2fd !important;
+  color: #1565c0 !important;
+  border: 1px solid rgba(21, 101, 192, 0.2) !important;
+}
+
+/* Vermelho para os cancelados */
+.status-cancelado {
+  background-color: #ffebee !important;
+  color: #c62828 !important; /* Corrigido o caractere quebrado extra do arquivo original */
+  border: 1px solid rgba(198, 40, 40, 0.2) !important;
+}
+
+/* Ajuste dos Inputs de Edição dos cards */
+.edit-input {
+  width: 100%;
+  padding: 0.7rem 1rem;
+  margin-top: 0.4rem;
+  margin-bottom: 0.5rem;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.95rem;
+  color: #2c2c2c;
+  background-color: #ffffff;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.2s;
+}
+
+.edit-input:focus {
+  border-color: #d8a4a5;
+}
+
+.small-btn {
+  width: auto !important;
+  padding: 0.7rem 1.5rem !important;
+  font-size: 0.85rem !important;
+  margin-top: 1rem !important;
+}
+
+
+/* ==========================================================================
+   APENAS COMPORTAMENTO ESTRUTURAL DO RESPONSIVO (Telas menores de 768px)
+   ========================================================================== */
+@media (max-width: 768px) {
+  .perfil-card {
+    padding: 2rem 1.5rem;
+  }
+
+  .form-row, .pr-grid-cep, .pr-grid-uf {
+    grid-template-columns: 1fr !important;
+    gap: 1.2rem;
+  }
+
+  .tabs-container {
+    flex-direction: column;
+    padding: 0.3rem;
+  }
+
+  .tab-btn {
+    padding: 0.6rem;
+  }
+
+  .main-header h1 {
+    font-size: 2.4rem;
+  }
+
+  .small-btn {
+    width: 100% !important; /* No celular o botão de atualizar ocupa a linha toda */
+  }
+}

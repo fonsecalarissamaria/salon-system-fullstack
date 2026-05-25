@@ -1,0 +1,73 @@
+<div class="home-wrapper">
+  <header class="main-header">
+    <h1>Beauty Salon</h1>
+    <p class="subtitle">Beleza & Bem-Estar em cada detalhe</p>
+    <div class="header-divider"></div>
+  </header>
+
+  <main class="content-container">
+    <!-- Seção Clientes -->
+    <section class="menu-section">
+      <h2 class="section-title">Para Nossas Clientes</h2>
+
+      <div class="nav-grid">
+        <a routerLink="/cadastro" class="service-card">
+          <div class="card-icon-wrapper">
+            <span class="card-icon">✨</span>
+          </div>
+          <h3>Meu Cadastro</h3>
+          <p>Primeira vez aqui? Faça seu cadastro rápido e seja muito bem-vinda ao nosso espaço.</p>
+          <div class="action-btn">
+            <span>Cadastrar</span>
+            <span class="arrow">→</span>
+          </div>
+        </a>
+
+        <a routerLink="/agendamentos" class="service-card">
+          <div class="card-icon-wrapper">
+            <span class="card-icon">📅</span>
+          </div>
+          <h3>Agendar Horário</h3>
+          <p>Escolha seus serviços favoritos e defina o melhor dia e horário para realçar sua beleza.</p>
+          <div class="action-btn">
+            <span>Agendar</span>
+            <span class="arrow">→</span>
+          </div>
+        </a>
+
+        <a routerLink="/perfil" class="service-card">
+          <div class="card-icon-wrapper">
+            <span class="card-icon">👤</span>
+          </div>
+          <h3>Meu Perfil</h3>
+          <p>Acesse seus dados, atualize informações e veja seus agendamentos.</p>
+          <div class="action-btn">
+            <span>Acessar</span>
+            <span class="arrow">→</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- Seção Administrativa -->
+    <section class="menu-section admin-section">
+      <div class="section-divider"></div>
+      <h2 class="section-title restricted">Acesso Restrito</h2>
+
+      <div class="nav-grid single-item">
+        <a routerLink="/login" class="service-card management-card">
+          <div class="card-icon-wrapper mini">
+            <span class="card-icon">🔐</span>
+          </div>
+          <div class="management-info">
+            <h3>Painel de Gestão</h3>
+            <p>Espaço reservado exclusivamente para a administração do salão e controle de horários.</p>
+          </div>
+          <div class="action-btn outline">
+            <span>Acessar</span>
+          </div>
+        </a>
+      </div>
+    </section>
+  </main>
+</div>
